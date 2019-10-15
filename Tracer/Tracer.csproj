@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConcurrentSerializableDictionary.cs" />
     <Compile Include="ConsoleTraceResultWriter.cs" />
     <Compile Include="FileTraceResultWriter.cs" />
     <Compile Include="IResultWriter.cs" />

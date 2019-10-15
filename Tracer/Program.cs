@@ -26,10 +26,10 @@ namespace Tracer
             Thread.Sleep(100);
             tracer.StopTrace();
             ConsoleTraceResultWriter rw = new ConsoleTraceResultWriter();
-            /*
+            
             XMLSerializer xml = new XMLSerializer();
             rw.WriteResult(xml.Serialize(tracer.GetTraceResult()));
-            */
+            
             JSONSerializer json = new JSONSerializer();
             rw.WriteResult(json.Serialize(tracer.GetTraceResult()));
             Console.ReadLine();
