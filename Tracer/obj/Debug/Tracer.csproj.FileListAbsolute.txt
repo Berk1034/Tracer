@@ -5,3 +5,6 @@ C:\!Work!\3 КУРС\5 СЕМ\СПП\Tracer\Tracer\obj\Debug\Tracer.csprojAssemb
 C:\!Work!\3 КУРС\5 СЕМ\СПП\Tracer\Tracer\obj\Debug\Tracer.csproj.CoreCompileInputs.cache
 C:\!Work!\3 КУРС\5 СЕМ\СПП\Tracer\Tracer\obj\Debug\Tracer.exe
 C:\!Work!\3 КУРС\5 СЕМ\СПП\Tracer\Tracer\obj\Debug\Tracer.pdb
+C:\!Work!\3 КУРС\5 СЕМ\СПП\Tracer\Tracer\bin\Debug\Newtonsoft.Json.pdb
+C:\!Work!\3 КУРС\5 СЕМ\СПП\Tracer\Tracer\bin\Debug\Newtonsoft.Json.xml
+C:\!Work!\3 КУРС\5 СЕМ\СПП\Tracer\Tracer\obj\Debug\Tracer.csproj.CopyComplete

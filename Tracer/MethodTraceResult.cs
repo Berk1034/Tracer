@@ -5,15 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.Diagnostics;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace Tracer
 {
+    [JsonObject]
+    [Serializable]
+    [XmlRoot("method")]
     public class MethodTraceResult
     {
-        public static MethodTraceResult StackTop { get; }
-        public List<MethodTraceResult> Methods { get; }
+        [JsonIgnore]
+        [XmlIgnore]
         private Stopwatch _stopwatch;
-
+        [JsonProperty("name")]
+        [XmlAttribute("name")]
+        public string MethodName { get; set; }
+        [JsonProperty("time")]
+        [XmlAttribute("time")]
         public string WorkTimeStr
         {
             get
@@ -25,10 +34,18 @@ namespace Tracer
                 WorkTimeStr = value;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
         public long WorkTime { get; set; }
+        [JsonProperty("class")]
+        [XmlAttribute("class")]
         public string ClassName { get; set; }
-        public string MethodName { get; set; }
+        [JsonIgnore]
+        [XmlIgnore]
+        public static MethodTraceResult StackTop { get; }
+        [JsonProperty("methods")]
+        [XmlArray("methods")]
+        public List<MethodTraceResult> Methods { get; }
 
         static MethodTraceResult()
         {

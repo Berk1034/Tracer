@@ -4,19 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
-
+using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace Tracer
 {
+    [JsonObject]
+    [Serializable]
+    [XmlRoot("thread")]
     public class ThreadTraceResult
     {
+        [JsonProperty("id")]
+        [XmlAttribute("id")]
         public uint Id { get; set; }
-
-        public List<MethodTraceResult> RootMethods { get; set; }//Methods
-        public Stack<MethodTraceResult> InnerMethods { get; set; }//LastMethods
-
-        public int MethodsCount { get; private set; }
-
+        [JsonProperty("time")]
+        [XmlAttribute("time")]
         public string WorkTimeStr
         {
             get
@@ -28,8 +30,18 @@ namespace Tracer
                 WorkTimeStr = value;
             }
         }
-
+        [JsonIgnore]
+        [XmlIgnore]
         public double WorkTime { get; set; }
+        [JsonProperty("methods")]
+        [XmlArray("methods")]
+        public List<MethodTraceResult> RootMethods { get; set; }
+        [JsonIgnore]
+        [XmlIgnore]
+        public Stack<MethodTraceResult> InnerMethods { get; set; }
+        [JsonIgnore]
+        [XmlIgnore]
+        public int MethodsCount { get; private set; }
 
         public ThreadTraceResult(uint id)
             : this()

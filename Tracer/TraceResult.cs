@@ -4,11 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace Tracer
 {
+    [JsonObject]
+    [XmlRoot("root")]
+    [Serializable]
     public class TraceResult
     {
+        [JsonProperty("threads")]
+        [XmlElement("threads")]
         public ConcurrentDictionary<int, ThreadTraceResult> Threads { get; set; }
 
         public TraceResult()
