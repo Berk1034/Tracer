@@ -1,0 +1,7 @@
+C:\!Work!\3 КУРС\5 СЕМ\СПП\Tracer\Tracer\bin\Debug\Tracer.exe.config
+C:\!Work!\3 КУРС\5 СЕМ\СПП\Tracer\Tracer\bin\Debug\Tracer.exe
+C:\!Work!\3 КУРС\5 СЕМ\СПП\Tracer\Tracer\bin\Debug\Tracer.pdb
+C:\!Work!\3 КУРС\5 СЕМ\СПП\Tracer\Tracer\obj\Debug\Tracer.csprojAssemblyReference.cache
+C:\!Work!\3 КУРС\5 СЕМ\СПП\Tracer\Tracer\obj\Debug\Tracer.csproj.CoreCompileInputs.cache
+C:\!Work!\3 КУРС\5 СЕМ\СПП\Tracer\Tracer\obj\Debug\Tracer.exe
+C:\!Work!\3 КУРС\5 СЕМ\СПП\Tracer\Tracer\obj\Debug\Tracer.pdb

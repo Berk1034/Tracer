@@ -10,6 +10,8 @@ namespace Tracer
 {
     public class MethodTraceResult
     {
+        public static MethodTraceResult StackTop { get; }
+        public List<MethodTraceResult> Methods { get; }
         private Stopwatch _stopwatch;
 
         public string WorkTimeStr
@@ -28,6 +30,13 @@ namespace Tracer
         public string ClassName { get; set; }
         public string MethodName { get; set; }
 
+        static MethodTraceResult()
+        {
+            StackTop = new MethodTraceResult();
+            StackTop.ClassName = null;
+            StackTop.MethodName = null;
+        }
+
         public MethodTraceResult(string methodName, string className)
             : this()
         {
@@ -37,6 +46,7 @@ namespace Tracer
 
         private MethodTraceResult()
         {
+            Methods = new List<MethodTraceResult>();
             _stopwatch = new Stopwatch();
         }
 
@@ -56,5 +66,14 @@ namespace Tracer
             WorkTime = _stopwatch.ElapsedMilliseconds;
         }
 
+        public static bool AddNestedMethod(MethodTraceResult parent, MethodTraceResult child)
+        {
+            if (child == null)
+                return false;
+
+            parent.Methods.Add(child);
+
+            return true;
+        }
     }
 }
