@@ -7,3 +7,12 @@ C:\!Work!\3 КУРС\5 СЕМ\СПП\TracerLibrary\TracerLibrary\obj\Debug\Trace
 C:\!Work!\3 КУРС\5 СЕМ\СПП\TracerLibrary\TracerLibrary\obj\Debug\TracerLibrary.csproj.CopyComplete
 C:\!Work!\3 КУРС\5 СЕМ\СПП\TracerLibrary\TracerLibrary\obj\Debug\TracerLibrary.dll
 C:\!Work!\3 КУРС\5 СЕМ\СПП\TracerLibrary\TracerLibrary\obj\Debug\TracerLibrary.pdb
+C:\!Work!\3 КУРС\5 СЕМ\СПП\Tracer\TracerLibrary\TracerLibrary\bin\Debug\TracerLibrary.dll
+C:\!Work!\3 КУРС\5 СЕМ\СПП\Tracer\TracerLibrary\TracerLibrary\bin\Debug\TracerLibrary.pdb
+C:\!Work!\3 КУРС\5 СЕМ\СПП\Tracer\TracerLibrary\TracerLibrary\bin\Debug\Newtonsoft.Json.pdb
+C:\!Work!\3 КУРС\5 СЕМ\СПП\Tracer\TracerLibrary\TracerLibrary\bin\Debug\Newtonsoft.Json.xml
+C:\!Work!\3 КУРС\5 СЕМ\СПП\Tracer\TracerLibrary\TracerLibrary\obj\Debug\TracerLibrary.csprojAssemblyReference.cache
+C:\!Work!\3 КУРС\5 СЕМ\СПП\Tracer\TracerLibrary\TracerLibrary\obj\Debug\TracerLibrary.csproj.CoreCompileInputs.cache
+C:\!Work!\3 КУРС\5 СЕМ\СПП\Tracer\TracerLibrary\TracerLibrary\obj\Debug\TracerLibrary.csproj.CopyComplete
+C:\!Work!\3 КУРС\5 СЕМ\СПП\Tracer\TracerLibrary\TracerLibrary\obj\Debug\TracerLibrary.dll
+C:\!Work!\3 КУРС\5 СЕМ\СПП\Tracer\TracerLibrary\TracerLibrary\obj\Debug\TracerLibrary.pdb

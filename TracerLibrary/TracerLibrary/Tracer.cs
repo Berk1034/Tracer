@@ -24,12 +24,20 @@ namespace TracerLibrary
         {
             Calculated = false;
             int threadId = Thread.CurrentThread.ManagedThreadId;
-            if (!ThreadTraceResult.IsExist(threadId, Traceresult.Threads))
+
+            if (!Traceresult.Threads.Keys.Contains(threadId))
             {
                 var temp = new ThreadTraceResult((uint)threadId);
                 Traceresult.Threads.GetOrAdd(threadId, temp);
             }
 
+            /*
+            if (!ThreadTraceResult.IsExist(threadId, Traceresult.Threads))
+            {
+                var temp = new ThreadTraceResult((uint)threadId);
+                Traceresult.Threads.GetOrAdd(threadId, temp);
+            }
+            */
             MethodTraceResult Stacktop = Traceresult.Threads[threadId].InnerMethods.Peek();
 
             StackTrace Stacktrace = new StackTrace();

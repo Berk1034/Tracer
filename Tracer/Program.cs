@@ -9,20 +9,39 @@ namespace Tracer
 {
     class Program
     {
-        public static void TestMe()
+        public static void TestMe(Tracer tracer)
         {
+            tracer.StartTrace();
             int z = 100;
-            for (int i = 1; i < 100; i++)
+            for (int i = 1; i < 10000; i++)
             {
+                i.ToString();
                 z = z - i;
             }
+//            TestMe1(tracer);
+            tracer.StopTrace();
+        }
+
+        public static void TestMe1(Tracer tracer)
+        {
+            tracer.StartTrace();
+            int z = 100;
+            for (int i = 1; i < 10000; i++)
+            {
+                i.ToString();
+                z = z - i;
+            }
+            tracer.StopTrace();
         }
 
         static void Main(string[] args)
         {
             Tracer tracer = new Tracer();
             tracer.StartTrace();
-            TestMe();
+            TestMe(tracer);
+            TestMe(tracer);
+            Thread thread1 = new Thread(() => { TestMe1(tracer); });
+            thread1.Start();
             Thread.Sleep(100);
             tracer.StopTrace();
             ConsoleTraceResultWriter rw = new ConsoleTraceResultWriter();

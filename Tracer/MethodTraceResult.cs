@@ -40,19 +40,9 @@ namespace Tracer
         [JsonProperty("class")]
         [XmlAttribute("class")]
         public string ClassName { get; set; }
-        [JsonIgnore]
-        [XmlIgnore]
-        public static MethodTraceResult StackTop { get; }
         [JsonProperty("methods")]
         [XmlArray("methods")]
         public List<MethodTraceResult> Methods { get; }
-
-        static MethodTraceResult()
-        {
-            StackTop = new MethodTraceResult();
-            StackTop.ClassName = null;
-            StackTop.MethodName = null;
-        }
 
         public MethodTraceResult(string methodName, string className)
             : this()
@@ -83,14 +73,13 @@ namespace Tracer
             WorkTime = _stopwatch.ElapsedMilliseconds;
         }
 
-        public static bool AddNestedMethod(MethodTraceResult parent, MethodTraceResult child)
+        public void AddChildMethod(MethodTraceResult child)
         {
-            if (child == null)
-                return false;
+            if (child != null)
+                this.Methods.Add(child);
+            else
+                return;
 
-            parent.Methods.Add(child);
-
-            return true;
         }
     }
 }

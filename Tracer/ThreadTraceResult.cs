@@ -35,10 +35,10 @@ namespace Tracer
         public double WorkTime { get; set; }
         [JsonProperty("methods")]
         [XmlArray("methods")]
-        public List<MethodTraceResult> RootMethods { get; set; }
+        public List<MethodTraceResult> Methods { get; set; }
         [JsonIgnore]
         [XmlIgnore]
-        public Stack<MethodTraceResult> InnerMethods { get; set; }
+        public Stack<MethodTraceResult> LastStackMethods { get; set; }
         [JsonIgnore]
         [XmlIgnore]
         public int MethodsCount { get; private set; }
@@ -51,17 +51,16 @@ namespace Tracer
 
         private ThreadTraceResult()
         {
-            InnerMethods = new Stack<MethodTraceResult>();
-            InnerMethods.Push(MethodTraceResult.StackTop);
-            RootMethods = new List<MethodTraceResult>();
-            Id = uint.MaxValue;
+            LastStackMethods = new Stack<MethodTraceResult>();
+            Methods = new List<MethodTraceResult>();
+            Id = 0;
             WorkTime = 0;
         }
 
         public double CalculateFullTime()
         {
             this.MethodsCount = 0;
-            WorkTime = SummAllMethodsTimes(RootMethods);
+            WorkTime = SummAllMethodsTimes(Methods);
 
             return WorkTime;
         }
@@ -77,19 +76,6 @@ namespace Tracer
 
             this.WorkTime = summ;
             return summ;
-        }
-
-        public static bool IsExist(int threadId, ConcurrentDictionary<int, ThreadTraceResult> threads)
-        {
-            foreach (KeyValuePair<int, ThreadTraceResult> thread in threads)
-            {
-                if (threadId == thread.Key)
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
     }
 }
