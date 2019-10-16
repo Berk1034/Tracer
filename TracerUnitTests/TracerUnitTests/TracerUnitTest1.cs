@@ -11,11 +11,13 @@ namespace TracerUnitTests
     {
         private Tracer _tracer;
         private B _innerClassB;
+
         public A(Tracer tracer)
         {
             this._tracer = tracer;
             _innerClassB = new B(_tracer);
         }
+
         public void MethodA()
         {
             _tracer.StartTrace();
@@ -33,6 +35,7 @@ namespace TracerUnitTests
             Thread thread1 = new Thread(() => { b.MethodBWithCycle(); });
 
             thread1.Start();
+
             _tracer.StopTrace();
         }
     }
@@ -41,11 +44,13 @@ namespace TracerUnitTests
     {
         private Tracer _tracer;
         private List<int> TestInt;
+
         public B(Tracer tracer)
         {
             this._tracer = tracer;
             TestInt = new List<int>();
         }
+
         public void MethodBWithCycle()
         {
             _tracer.StartTrace();
@@ -62,6 +67,7 @@ namespace TracerUnitTests
         private Tracer _tracer;
         private List<int> TestInt;
         private D _innerClassD;
+
         public C(Tracer tracer)
         {
             this._tracer = tracer;
@@ -78,11 +84,10 @@ namespace TracerUnitTests
 
             thread1.Start();
             thread2.Start();
+            MethodCWithCycle();
             for(int i = 1; i < 1000; i++) {
-                MethodCWithCycle();
-                TestInt.Clear();
+                TestInt.Add(i);           
             }
-
 
             _tracer.StopTrace();
         }
@@ -92,7 +97,7 @@ namespace TracerUnitTests
             _tracer.StartTrace();
             for (int i = 0; i < 1000; i++)
             {
-                TestInt.Add(i * 5);
+                i.ToString();
             }
             _tracer.StopTrace();
         }
@@ -102,6 +107,7 @@ namespace TracerUnitTests
     {
         private Tracer _tracer;
         private List<int> TestInt;
+
         public D(Tracer tracer)
         {
             this._tracer = tracer;
@@ -163,7 +169,20 @@ namespace TracerUnitTests
             Tracer tracer = new Tracer();
             A a = new A(tracer);
             a.MultiThreadedMethodA();
-            Assert.AreEqual(1, tracer.GetTraceResult().Threads.Count);
+            Assert.AreNotEqual(0, tracer.GetTraceResult().Threads.Count);
+        }
+
+        [TestMethod]
+        public void ShouldReturnEqualTimeForMultipleThreadsAndAllTheirMethods()
+        {
+            Tracer tracer = new Tracer();
+            A a = new A(tracer);
+            a.MultiThreadedMethodA();
+
+            foreach(KeyValuePair<int, ThreadTraceResult> thread in tracer.GetTraceResult().Threads)
+            {
+                Assert.AreEqual((int)Math.Floor(thread.Value.WorkTime), tracer.GetTraceResult().GetSummOfMethodsWorkTimes(thread.Key));
+            }
         }
 
         [TestMethod]
@@ -171,9 +190,9 @@ namespace TracerUnitTests
         {
             Tracer tracer = new Tracer();
             A a = new A(tracer);
-            a.MultiThreadedMethodA();
+            a.MethodA();
 
-            foreach(KeyValuePair<int, ThreadTraceResult> thread in tracer.GetTraceResult().Threads)
+            foreach (KeyValuePair<int, ThreadTraceResult> thread in tracer.GetTraceResult().Threads)
             {
                 Assert.AreEqual((int)Math.Floor(thread.Value.WorkTime), tracer.GetTraceResult().GetSummOfMethodsWorkTimes(thread.Key));
             }
