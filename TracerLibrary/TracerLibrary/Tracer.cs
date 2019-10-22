@@ -25,38 +25,29 @@ namespace TracerLibrary
             Calculated = false;
             int threadId = Thread.CurrentThread.ManagedThreadId;
 
-            if (!Traceresult.Threads.Keys.Contains(threadId))
-            {
-                var temp = new ThreadTraceResult((uint)threadId);
-                Traceresult.Threads.GetOrAdd(threadId, temp);
-            }
-
-            /*
-            if (!ThreadTraceResult.IsExist(threadId, Traceresult.Threads))
-            {
-                var temp = new ThreadTraceResult((uint)threadId);
-                Traceresult.Threads.GetOrAdd(threadId, temp);
-            }
-            */
-            MethodTraceResult Stacktop = Traceresult.Threads[threadId].InnerMethods.Peek();
+            var thread = Traceresult.Threads.GetOrAdd(threadId, (_) => new ThreadTraceResult((uint)threadId));
 
             StackTrace Stacktrace = new StackTrace();
             MethodBase method = Stacktrace.GetFrame(1).GetMethod();
             MethodTraceResult Newmethod = new MethodTraceResult(method.Name, method.ReflectedType.Name);
             Newmethod.StartTrace();
-            MethodTraceResult.AddNestedMethod(Stacktop, Newmethod);
-            if (Stacktop.ClassName == null)
+
+            if (thread.LastStackMethods.Count() != 0)
             {
-                Traceresult.Threads[threadId].RootMethods.Add(Newmethod);
+                thread.LastStackMethods.Peek().AddChildMethod(Newmethod);
+            }
+            else
+            {
+                thread.Methods.Add(Newmethod);
             }
 
-            Traceresult.Threads[threadId].InnerMethods.Push(Newmethod);
+            thread.LastStackMethods.Push(Newmethod);
         }
 
         public void StopTrace()
         {
             int threadId = Thread.CurrentThread.ManagedThreadId;
-            MethodTraceResult lastMethod = Traceresult.Threads[threadId].InnerMethods.Pop();
+            MethodTraceResult lastMethod = Traceresult.Threads[threadId].LastStackMethods.Pop();
             lastMethod.StopTrace();
         }
 

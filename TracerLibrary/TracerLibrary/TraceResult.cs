@@ -33,7 +33,7 @@ namespace TracerLibrary
             double result = 0;
             ThreadTraceResult Threadtraceresult = this.Threads[Indexofthread];
 
-            foreach (MethodTraceResult method in Threadtraceresult.RootMethods)
+            foreach (MethodTraceResult method in Threadtraceresult.Methods)
             {
                 result += Math.Round(method.WorkTime + GetSummOfInnerMethodsWorkTimes(method.Methods));
             }

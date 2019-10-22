@@ -204,7 +204,7 @@ namespace TracerUnitTests
             Tracer tracer = new Tracer();
             C c = new C(tracer);
             c.MultiThreadedMethodC();
-            Assert.AreEqual(1, tracer.GetTraceResult().Threads.Values.ElementAt(0).InnerMethods.Count);
+            Assert.AreEqual(1, tracer.GetTraceResult().Threads.Values.ElementAt(0).Methods.Count);
         }
 
         [TestMethod]
