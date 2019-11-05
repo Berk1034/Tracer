@@ -85,6 +85,7 @@ namespace TracerUnitTests
             thread1.Start();
             thread2.Start();
             MethodCWithCycle();
+            System.Threading.Thread.Sleep(2000);
             for(int i = 1; i < 1000; i++) {
                 TestInt.Add(i);           
             }
